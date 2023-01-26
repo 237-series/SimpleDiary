@@ -11,7 +11,16 @@ struct DiaryInputModal: View {
     @Binding var isPresented: Bool
     @Environment(\.dismiss) private var dismiss
     
+    var dataManager:DiaryDataManager = DiaryDataManager.shared
+    
     @State private var title:String = ""
+    
+    func addData() -> Bool {
+        let newData = DiaryModel(keyDate: Date(), title: title)
+        let result = dataManager.add(DiaryModel: newData)
+        return !result
+        
+    }
     
     var TopButton: some View {
         // Top Button
@@ -33,7 +42,8 @@ struct DiaryInputModal: View {
                     .font(.title)
                 Spacer()
                 Button(action: {
-                    
+                    let result = addData()
+                    isPresented = result
                 }) {
                     Image(systemName: "arrow.up")
                         .imageScale(.large)

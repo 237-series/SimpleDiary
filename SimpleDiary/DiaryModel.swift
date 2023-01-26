@@ -31,11 +31,24 @@ enum DiaryWeatherItem {
 }
 
 enum DiaryFeelingItem {
-    
+    /// 기분: [행복, 기쁨, 신남, 슬픔, 우울, 짜증, 화남, 그저그럼]
+    case happy
+    case delight
+    case excited
+    case sad
+    case moodiness
+    case annoying
+    case angry
+    case soso
 }
 
 enum DiaryStateItem {
-    
+    /// 상태: [매우좋음, 좋음, 보통, 나쁨, 매우나쁨]
+    case verygood
+    case good
+    case soso
+    case bad
+    case verybad
 }
 
 struct DiaryModel {

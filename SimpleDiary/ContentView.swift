@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct TopArea: View {
+    @State private var isShowModal = false
     var body: some View {
         HStack {
             Button {
-                
+                self.isShowModal = true
             } label: {
                 Text("한줄 일기 기록")
                     .font(.system(size: 33))
                     .frame(maxWidth: .infinity)
             }
             .padding()
+            .sheet(isPresented: $isShowModal) {
+                DiaryInputModal(isPresented: self.$isShowModal)
+            }
         }
         .background(.white)
         .cornerRadius(20)
@@ -28,7 +32,7 @@ struct TopArea: View {
 struct ContentsArea:View {
     var body: some View {
         ScrollView() {
-            VStack(spacing: 10) {
+            VStack(spacing: 20) {
                 DiaryListRow()
                 DiaryListRow()
                 DiaryListRow()
@@ -42,6 +46,8 @@ struct ContentsArea:View {
         .padding()
     }
 }
+
+
 
 
 struct DiaryListRow: View {

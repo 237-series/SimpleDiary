@@ -19,7 +19,7 @@ import Foundation
 
 */
 
-enum DiaryWeatherItem {
+enum DiaryWeatherItem: CaseIterable, Codable {
     /// 날씨: [맑음, 흐림, 비, 눈, 바람, 추움, 더움]
     case sunny
     case cloudy
@@ -30,7 +30,7 @@ enum DiaryWeatherItem {
     case hot
 }
 
-enum DiaryFeelingItem {
+enum DiaryFeelingItem: CaseIterable, Codable {
     /// 기분: [행복, 기쁨, 신남, 슬픔, 우울, 짜증, 화남, 그저그럼]
     case happy
     case delight
@@ -42,7 +42,7 @@ enum DiaryFeelingItem {
     case soso
 }
 
-enum DiaryStateItem {
+enum DiaryStateItem: CaseIterable, Codable {
     /// 상태: [매우좋음, 좋음, 보통, 나쁨, 매우나쁨]
     case verygood
     case good
@@ -51,9 +51,17 @@ enum DiaryStateItem {
     case verybad
 }
 
-struct DiaryModel {
+struct DiaryModel:Codable {
     /// id, 최초 작성시 사용
     var keyDate:Date
+    
+    func keyDateString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = .current
+        
+        return dateFormatter.string(from: keyDate)
+    }
     
     /// 마지막 수정 날짜
     var lastModifiedDate:Date?

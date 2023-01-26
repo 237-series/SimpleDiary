@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2321168E29827628004DA314 /* DiaryInputModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2321168D29827628004DA314 /* DiaryInputModal.swift */; };
+		232116902982D4D2004DA314 /* DiaryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2321168F2982D4D2004DA314 /* DiaryDataManager.swift */; };
 		23AD836729825B0D00CB3598 /* SimpleDiaryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AD836629825B0D00CB3598 /* SimpleDiaryApp.swift */; };
 		23AD836929825B0D00CB3598 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AD836829825B0D00CB3598 /* ContentView.swift */; };
 		23AD836B29825B0E00CB3598 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23AD836A29825B0E00CB3598 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		2321168D29827628004DA314 /* DiaryInputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryInputModal.swift; sourceTree = "<group>"; };
+		2321168F2982D4D2004DA314 /* DiaryDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDataManager.swift; sourceTree = "<group>"; };
 		23AD836329825B0D00CB3598 /* SimpleDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23AD836629825B0D00CB3598 /* SimpleDiaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDiaryApp.swift; sourceTree = "<group>"; };
 		23AD836829825B0D00CB3598 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				23AD837429825DFA00CB3598 /* DiaryModel.swift */,
 				23AD836A29825B0E00CB3598 /* Assets.xcassets */,
 				23AD836C29825B0E00CB3598 /* Preview Content */,
+				2321168F2982D4D2004DA314 /* DiaryDataManager.swift */,
 			);
 			path = SimpleDiary;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				23AD836929825B0D00CB3598 /* ContentView.swift in Sources */,
 				23AD837529825DFA00CB3598 /* DiaryModel.swift in Sources */,
 				2321168E29827628004DA314 /* DiaryInputModal.swift in Sources */,
+				232116902982D4D2004DA314 /* DiaryDataManager.swift in Sources */,
 				23AD836729825B0D00CB3598 /* SimpleDiaryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

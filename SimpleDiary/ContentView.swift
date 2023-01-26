@@ -30,12 +30,16 @@ struct TopArea: View {
 }
 
 struct ContentsArea:View {
+    @StateObject var dataManager:DiaryDataManager = DiaryDataManager.shared
+    
     var body: some View {
         ScrollView() {
             VStack(spacing: 20) {
-                DiaryListRow()
-                DiaryListRow()
-                DiaryListRow()
+                ForEach(Array(dataManager.getList().enumerated()), id: \.offset) {idx, data in
+                    DiaryListRow(diary: data)
+                }
+                
+                
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -51,6 +55,7 @@ struct ContentsArea:View {
 
 
 struct DiaryListRow: View {
+    var diary:DiaryModel
     var body: some View {
         HStack {
             // 로고 자리 (이모지로 대체)
@@ -60,10 +65,10 @@ struct DiaryListRow: View {
             
             VStack(alignment: .leading) {
                 //타이틀, 금액
-                Text("2023-01-25")
+                Text(diary.keyDateString())
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                Text("오늘은 행복한 하루~")
+                Text(diary.title)
                     .font(.title3)
             }
             

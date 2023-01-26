@@ -11,6 +11,7 @@
 		23AD836929825B0D00CB3598 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AD836829825B0D00CB3598 /* ContentView.swift */; };
 		23AD836B29825B0E00CB3598 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23AD836A29825B0E00CB3598 /* Assets.xcassets */; };
 		23AD836E29825B0E00CB3598 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23AD836D29825B0E00CB3598 /* Preview Assets.xcassets */; };
+		23AD837529825DFA00CB3598 /* DiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AD837429825DFA00CB3598 /* DiaryModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		23AD836829825B0D00CB3598 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		23AD836A29825B0E00CB3598 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23AD836D29825B0E00CB3598 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		23AD837429825DFA00CB3598 /* DiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				23AD836629825B0D00CB3598 /* SimpleDiaryApp.swift */,
 				23AD836829825B0D00CB3598 /* ContentView.swift */,
+				23AD837429825DFA00CB3598 /* DiaryModel.swift */,
 				23AD836A29825B0E00CB3598 /* Assets.xcassets */,
 				23AD836C29825B0E00CB3598 /* Preview Content */,
 			);
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23AD836929825B0D00CB3598 /* ContentView.swift in Sources */,
+				23AD837529825DFA00CB3598 /* DiaryModel.swift in Sources */,
 				23AD836729825B0D00CB3598 /* SimpleDiaryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

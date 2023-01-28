@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 /*
@@ -40,38 +41,52 @@ enum DiaryWeatherItem: CaseIterable, Codable {
         case .hot: return "🔥"
         }
     }
+    
+    var imageName: String {
+        return ""
+    }
 }
 
 enum DiaryFeelingItem: CaseIterable, Codable {
     /// 기분: [행복, 기쁨, 신남, 슬픔, 우울, 짜증, 화남, 그저그럼]
     case happy
-    case delight
-    case excited
+    //case delight
+    //case excited
     case sad
-    case moodiness
-    case annoying
+    //case moodiness
+    //case annoying
     case angry
     case soso
-    /*
+/*
     var displayImoji: String {
         switch self {
         case .happy: return "😀"
         case .delight: return "😆"
         case .excited: return "🤪"
         case .sad: return "😭"
-        case .moodiness
+        case .moodiness: return ""
         }
+    }*/
+    
+    var feelingColor: Color {
+        switch self {
+        case .happy:    return .green
+        case .sad:      return .blue
+        case .angry:    return .red
+        case .soso:     return .white
+        }
+        
     }
-     */
+    
 }
 
-enum DiaryStateItem: CaseIterable, Codable {
+enum DiaryStateItem:Int, CaseIterable, Codable {
     /// 상태: [매우좋음, 좋음, 보통, 나쁨, 매우나쁨]
-    case verygood
-    case good
-    case soso
-    case bad
-    case verybad
+    case verygood   = 5
+    case good       = 4
+    case soso       = 3
+    case bad        = 2
+    case verybad    = 1
 }
 
 struct DiaryModel:Codable {

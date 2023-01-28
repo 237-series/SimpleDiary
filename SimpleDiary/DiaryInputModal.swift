@@ -13,6 +13,8 @@ struct DiaryInputModal: View {
     
     var dataManager:DiaryDataManager = DiaryDataManager.shared
     
+    @State var selectedWeather:DiaryWeatherItem = .sunny
+    
     @State private var title:String = ""
     
     func addData() -> Bool {
@@ -34,9 +36,26 @@ struct DiaryInputModal: View {
         }.padding()
     }
     
+    var PickerArea: some View {
+        VStack {
+            Picker("", selection: $selectedWeather) {
+                ForEach(DiaryWeatherItem.allCases, id:\.self) { weatherItem in
+                    Text(weatherItem.displayImoji).tag(weatherItem)
+                }
+            } .onChange(of: selectedWeather, perform: { newWeather in
+                
+            })
+            .pickerStyle(SegmentedPickerStyle())
+            
+        }
+    }
+    
+    
     var InputArea: some View {
         
+        
         VStack {
+            
             HStack {
                 Text("오늘은 어떤가요?")
                     .font(.title)
@@ -54,8 +73,9 @@ struct DiaryInputModal: View {
                     
                 }
                 
-                
             }
+            
+            PickerArea
             
             TextField("...입력하기...", text: $title)
                 .keyboardType(.decimalPad)

@@ -54,6 +54,7 @@ struct ContentsArea:View {
 
 
 
+
 struct DiaryListRow: View {
     var diary:DiaryModel
     var body: some View {

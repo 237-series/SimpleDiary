@@ -28,6 +28,18 @@ enum DiaryWeatherItem: CaseIterable, Codable {
     case wind
     case cold
     case hot
+    
+    var displayImoji: String {
+        switch self {
+        case .sunny: return "☀️"
+        case .cloudy: return "🌥️"
+        case .rain: return "🌧️"
+        case .snow: return "🌨️"
+        case .wind: return "💨"
+        case .cold: return "❄️"
+        case .hot: return "🔥"
+        }
+    }
 }
 
 enum DiaryFeelingItem: CaseIterable, Codable {
@@ -40,6 +52,17 @@ enum DiaryFeelingItem: CaseIterable, Codable {
     case annoying
     case angry
     case soso
+    /*
+    var displayImoji: String {
+        switch self {
+        case .happy: return "😀"
+        case .delight: return "😆"
+        case .excited: return "🤪"
+        case .sad: return "😭"
+        case .moodiness
+        }
+    }
+     */
 }
 
 enum DiaryStateItem: CaseIterable, Codable {

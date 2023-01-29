@@ -20,15 +20,15 @@ import SwiftUI
 
 */
 
-enum DiaryWeatherItem: CaseIterable, Codable {
+enum DiaryWeatherItem: String, CaseIterable, Codable {
     /// 날씨: [맑음, 흐림, 비, 눈, 바람, 추움, 더움]
     case sunny
     case cloudy
     case rain
     case snow
     case wind
-    case cold
-    case hot
+//    case cold
+//    case hot
     
     var displayImoji: String {
         switch self {
@@ -37,14 +37,11 @@ enum DiaryWeatherItem: CaseIterable, Codable {
         case .rain: return "🌧️"
         case .snow: return "🌨️"
         case .wind: return "💨"
-        case .cold: return "❄️"
-        case .hot: return "🔥"
+//        case .cold: return "❄️"
+//        case .hot: return "🔥"
         }
     }
     
-    var imageName: String {
-        return ""
-    }
 }
 
 enum DiaryFeelingItem: CaseIterable, Codable {

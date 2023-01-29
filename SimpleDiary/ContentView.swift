@@ -95,6 +95,8 @@ struct ContentView: View {
                 
                 // Area:2 - ScrollArea
                 ContentsArea()
+                
+                CalendarView().environmentObject(DateHolder())
             }
             .padding()
         }

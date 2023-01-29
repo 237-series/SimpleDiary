@@ -15,7 +15,7 @@ struct DiaryDetailView: View {
             return "weather." + weather.rawValue
         }
         
-        return "weather.cloudy"
+        return "weather.default"
     }
     
     func getFeelingColor() -> Color {

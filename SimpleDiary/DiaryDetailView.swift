@@ -52,6 +52,13 @@ struct DiaryDetailView: View {
         }
     }
     
+    func getStateList() -> Array<String> {
+        if let state = diary.state {
+            return Array(repeating: "star.fill", count: state.rawValue)
+        }
+        return Array()
+    }
+    
     var diaryHead: some View {
         HStack {
             Text (diary.keyDateString())
@@ -59,21 +66,13 @@ struct DiaryDetailView: View {
                 .foregroundColor(.secondary)
             Spacer()
             HStack(spacing: 0) {
-                Image(systemName: "star")
-                    .imageScale(.large)
-                    .foregroundColor(.red)
-                Image(systemName: "star")
-                    .imageScale(.large)
-                    .foregroundColor(.red)
-                Image(systemName: "star")
-                    .imageScale(.large)
-                    .foregroundColor(.red)
-                Image(systemName: "star")
-                    .imageScale(.large)
-                    .foregroundColor(.red)
-                Image(systemName: "star")
-                    .imageScale(.large)
-                    .foregroundColor(.red)
+                ForEach(getStateList(), id: \.self) { imageName in
+                    Image(systemName: imageName)
+                        .imageScale(.medium)
+                        .foregroundColor(.red)
+                    
+                }
+                
             }
             
         }
@@ -133,6 +132,6 @@ struct DiaryDetailView: View {
 
 struct DiaryDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DiaryDetailView(diary: DiaryModel(keyDate: Date(), title: "한줄 일기", feeling: .happy))
+        DiaryDetailView(diary: DiaryModel(keyDate: Date(), title: "한줄 일기", feeling: .happy, state: .good))
     }
 }

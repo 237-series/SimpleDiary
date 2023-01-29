@@ -18,6 +18,15 @@ struct DiaryDetailView: View {
         return "weather.cloudy"
     }
     
+    func getFeelingColor() -> Color {
+        if let feeling = self.diary.feeling {
+            return feeling.feelingColor
+        }
+        
+        return .white
+    }
+    
+    
     var weatherImage: some View {
         GeometryReader { _ in
             Image(getImageName())
@@ -27,6 +36,8 @@ struct DiaryDetailView: View {
         }
     }
     
+    
+    
     var diaryTitle: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
@@ -35,8 +46,35 @@ struct DiaryDetailView: View {
                     .foregroundColor(.black)
                 Spacer()
                 
+                
+                
             }
-            
+        }
+    }
+    
+    var diaryHead: some View {
+        HStack {
+            Text (diary.keyDateString())
+                .font(.title2).fontWeight(.bold)
+                .foregroundColor(.secondary)
+            Spacer()
+            HStack(spacing: 0) {
+                Image(systemName: "star")
+                    .imageScale(.large)
+                    .foregroundColor(.red)
+                Image(systemName: "star")
+                    .imageScale(.large)
+                    .foregroundColor(.red)
+                Image(systemName: "star")
+                    .imageScale(.large)
+                    .foregroundColor(.red)
+                Image(systemName: "star")
+                    .imageScale(.large)
+                    .foregroundColor(.red)
+                Image(systemName: "star")
+                    .imageScale(.large)
+                    .foregroundColor(.red)
+            }
             
         }
     }
@@ -44,12 +82,13 @@ struct DiaryDetailView: View {
     var diaryContents: some View {
         GeometryReader {
             VStack(alignment: .leading) {
+                diaryHead
                 diaryTitle
                 Spacer()
             }
             .frame(height: $0.size.height + 10)
             .padding(32)
-            .background(Color.white)
+            .background(.white)
             .cornerRadius(16)
             .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: -5)
         }
@@ -76,6 +115,6 @@ struct DiaryDetailView: View {
 
 struct DiaryDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DiaryDetailView(diary: DiaryModel(keyDate: Date(), title: "한줄 일기"))
+        DiaryDetailView(diary: DiaryModel(keyDate: Date(), title: "한줄 일기", feeling: .happy))
     }
 }

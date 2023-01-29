@@ -58,25 +58,26 @@ struct ContentsArea:View {
 struct DiaryListRow: View {
     var diary:DiaryModel
     var body: some View {
-        HStack {
-            // 로고 자리 (이모지로 대체)
-            Text("😀")
-                .font(.system(size: 45))
-                .cornerRadius(0.3)
+        NavigationLink(destination: DiaryDetailView(diary: diary)) {
             
-            VStack(alignment: .leading) {
-                //타이틀, 금액
-                Text(diary.keyDateString())
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                Text(diary.title)
-                    .font(.title3)
+            HStack {
+                // 로고 자리 (이모지로 대체)
+                Text("😀")
+                    .font(.system(size: 45))
+                    .cornerRadius(0.3)
+                
+                VStack(alignment: .leading) {
+                    //타이틀, 금액
+                    Text(diary.keyDateString())
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    Text(diary.title)
+                        .font(.title3)
+                        .foregroundColor(.black)
+                }
+                Spacer()
             }
-            
-            Spacer()
-            
         }
-        
     }
 }
 
@@ -85,20 +86,22 @@ struct DiaryListRow: View {
 
 struct ContentView: View {
     var body: some View {
-        ZStack{
-            Color.gray.ignoresSafeArea()
-                .opacity(0.2)
-            
-            VStack {
-                // Area:1 - TopButton
-                TopArea()
+        NavigationView {
+            ZStack{
+                Color.gray.ignoresSafeArea()
+                    .opacity(0.2)
                 
-                // Area:2 - ScrollArea
-                ContentsArea()
-                
-                CalendarView().environmentObject(DateHolder())
+                VStack {
+                    // Area:1 - TopButton
+                    TopArea()
+                    
+                    // Area:2 - ScrollArea
+                    ContentsArea()
+                    
+                    CalendarView().environmentObject(DateHolder())
+                }
+                .padding()
             }
-            .padding()
         }
     }
 }

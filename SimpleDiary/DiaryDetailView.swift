@@ -79,11 +79,29 @@ struct DiaryDetailView: View {
         }
     }
     
+    func getDiaryContents() -> String {
+        var text = "일기 내용입니다"
+        if let contents = diary.contents {
+            text = contents
+        }
+        return text
+    }
+    
+    var diaryDescription: some View {
+        ScrollView {
+            Text(getDiaryContents() )
+                .foregroundColor(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+    
     var diaryContents: some View {
         GeometryReader {
             VStack(alignment: .leading) {
                 diaryHead
                 diaryTitle
+                Text("")
+                diaryDescription
                 Spacer()
             }
             .frame(height: $0.size.height + 10)

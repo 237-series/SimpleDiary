@@ -25,8 +25,8 @@ class DiaryDataManager:ObservableObject {
     
     func getDummyData() -> [DiaryModel] {
         return [
-            DiaryModel(keyDate: Date(), title: "오늘은 좋았던날"),
-            DiaryModel(keyDate: Date(), title: "오늘은 조금 평범했던 날")
+            DiaryModel(keyDate: Date(), title: "오늘은 좋았던날", contents: "오늘 이야기는 3달 전으로 돌아가야 한다", weather: .none, state: .verygood),
+            DiaryModel(keyDate: Date(), title: "오늘은 조금 평범했던 날", contents: "조용한 주말이었다.", weather: .cloudy, state: .soso)
             
         ]
     }

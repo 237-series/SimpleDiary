@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct DiaryInputModal: View {
     @Binding var isPresented: Bool
     @Environment(\.dismiss) private var dismiss
@@ -16,9 +17,11 @@ struct DiaryInputModal: View {
     @State var selectedWeather:DiaryWeatherItem = .sunny
     
     @State private var title:String = ""
+    @State private var state:Int = 3
+    var range: ClosedRange<Int> = 1...5
     
     func addData() -> Bool {
-        let newData = DiaryModel(keyDate: Date(), title: title)
+        let newData = DiaryModel(keyDate: Date(), title: title, weather: selectedWeather)
         let result = dataManager.add(DiaryModel: newData)
         return !result
         
@@ -30,9 +33,20 @@ struct DiaryInputModal: View {
             Button {
                 dismiss()
             } label: {
-                Text("돌아가기")
+                Image(systemName: "chevron.backward")
             }
             Spacer()
+            Text("오늘은 어떤가요?")
+                .font(.title)
+                .foregroundColor(.secondary)
+            Spacer()
+            Button(action: {
+                let result = addData()
+                isPresented = result
+            }) {
+                Image(systemName: "checkmark.circle")
+                    .imageScale(.large)
+            }
         }.padding()
     }
     
@@ -50,36 +64,71 @@ struct DiaryInputModal: View {
         }
     }
     
+    func changeState(value:Int) {
+        if range ~= state + value {
+            state += value
+        }
+    }
     
-    var InputArea: some View {
-        
-        
-        VStack {
-            
-            HStack {
-                Text("오늘은 어떤가요?")
-                    .font(.title)
-                Spacer()
-                Button(action: {
-                    let result = addData()
-                    isPresented = result
-                }) {
-                    Image(systemName: "arrow.up")
-                        .imageScale(.large)
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.white)
-                        .background(.gray)
-                        .clipShape(Circle())
-                    
-                }
+    func getStateList() -> Array<String> {
+        return Array(repeating: "star", count: state)
+    }
+    
+    var StateStar: some View {
+        HStack(spacing: -8) {
+            ForEach(getStateList(), id: \.self) { imageName in
+                Image(systemName: imageName)
+                    .imageScale(.medium)
+                    .foregroundColor(.red)
                 
             }
+        }
+    }
+    
+    var StateStepper: some View {
+        HStack {
+            Button {
+                self.changeState(value: -1)
+            } label: {
+                Image(systemName: "minus.circle.fill")
+                    .imageScale(.large)
+                    .padding()
+            }
+            .foregroundColor(Color.gray.opacity(0.5))
             
+            Text("오늘의 상태 점수")
+                .font(.title2)
+                .foregroundColor(.gray)
+            Spacer()
+            /*
+            Text("\(state)")
+                .bold()
+                .font(Font.system(.title, design: .monospaced))
+                .frame(minWidth: 40, maxWidth: 60)
+             */
+            StateStar
+
+            Button {
+                self.changeState(value: 1)
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .imageScale(.large)
+                    .padding()
+            }
+            .foregroundColor(Color.gray.opacity(0.5))
+        }
+    }
+    
+    
+    var InputArea: some View {
+        VStack {
+            StateStepper
             PickerArea
-            
-            TextField("...입력하기...", text: $title)
-                .keyboardType(.decimalPad)
-                .font(.title)
+            Text("")
+            TextField("오늘의 한줄일기..", text: $title, axis: .vertical)
+                .font(.largeTitle)
+                .multilineTextAlignment(.leading)
+            Spacer()
         }
         .padding()
     }
@@ -94,3 +143,9 @@ struct DiaryInputModal: View {
     }
 }
 
+
+struct DiaryInputModal_Previews: PreviewProvider {
+    static var previews: some View {
+        DiaryInputModal(isPresented: .constant(true))
+    }
+}

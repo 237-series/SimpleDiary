@@ -98,6 +98,8 @@ struct DiaryModel:Codable {
         return dateFormatter.string(from: keyDate)
     }
     
+    var strDate:String?
+    
     /// 마지막 수정 날짜
     var lastModifiedDate:Date?
     
@@ -128,5 +130,7 @@ struct DiaryModel:Codable {
         self.weather = weather
         self.feeling = feeling
         self.state = state
+        
+        self.strDate = keyDateString()
     }
 }

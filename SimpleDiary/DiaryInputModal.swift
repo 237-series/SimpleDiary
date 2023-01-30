@@ -71,14 +71,14 @@ struct DiaryInputModal: View {
     }
     
     func getStateList() -> Array<String> {
-        return Array(repeating: "star", count: state)
+        return Array(repeating: "heart.square", count: state)
     }
     
     var StateStar: some View {
-        HStack(spacing: -8) {
+        HStack(spacing: -3) {
             ForEach(getStateList(), id: \.self) { imageName in
                 Image(systemName: imageName)
-                    .imageScale(.medium)
+                    .imageScale(.large)
                     .foregroundColor(.red)
                 
             }
@@ -96,8 +96,8 @@ struct DiaryInputModal: View {
             }
             .foregroundColor(Color.gray.opacity(0.5))
             
-            Text("오늘의 상태 점수")
-                .font(.title2)
+            Text("오늘의 상태")
+                .font(.title3)
                 .foregroundColor(.gray)
             Spacer()
             /*

@@ -54,7 +54,7 @@ struct DiaryDetailView: View {
     
     func getStateList() -> Array<String> {
         if let state = diary.state {
-            return Array(repeating: "star.fill", count: state.rawValue)
+            return Array(repeating: "heart.rectangle", count: state.rawValue)
         }
         return Array()
     }
@@ -65,10 +65,10 @@ struct DiaryDetailView: View {
                 .font(.title2).fontWeight(.bold)
                 .foregroundColor(.secondary)
             Spacer()
-            HStack(spacing: 0) {
+            HStack(spacing: -2) {
                 ForEach(getStateList(), id: \.self) { imageName in
                     Image(systemName: imageName)
-                        .imageScale(.medium)
+                        .imageScale(.large)
                         .foregroundColor(.red)
                     
                 }

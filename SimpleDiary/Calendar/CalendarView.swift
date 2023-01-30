@@ -66,3 +66,11 @@ extension Text
             .lineLimit(1)
     }
 }
+
+
+struct CalendarView_Previews: PreviewProvider {
+    static var previews: some View {
+        CalendarView()
+            .environmentObject(DateHolder())
+    }
+}

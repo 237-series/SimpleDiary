@@ -45,5 +45,6 @@ struct DateScrollerView: View {
 struct DateScrollerView_Previews: PreviewProvider {
     static var previews: some View {
         DateScrollerView()
+            .environmentObject(DateHolder())
     }
 }

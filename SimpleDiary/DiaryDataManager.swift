@@ -17,8 +17,9 @@ class DiaryDataManager:ObservableObject {
     @Published var dataList:[DiaryModel] = []
     
     private var datas:DiaryDict = [:]
-    private var keyDate = ""
-    private var strKeyDate:String {
+    
+    var keyDate = ""
+    var strKeyDate:String {
         get {
             keyDate
         }

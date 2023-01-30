@@ -15,7 +15,7 @@ struct DiaryDetailView: View {
             return "weather." + weather.rawValue
         }
         
-        return "weather.default"
+        return "weather.sunny"
     }
     
     func getFeelingColor() -> Color {
@@ -28,10 +28,10 @@ struct DiaryDetailView: View {
     
     
     var weatherImage: some View {
-        GeometryReader { _ in
+        GeometryReader { geo in
             Image(getImageName())
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .clipped()
         }
     }
@@ -78,6 +78,40 @@ struct DiaryDetailView: View {
         }
     }
     
+    var bottomButtons: some View {
+        HStack {
+            Spacer()
+            Button {
+                print("Hit Button")
+            } label: {
+                HStack {
+                    Image(systemName: "trash")
+                    Text("삭제")
+                        .fontWeight(.semibold)
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.red)
+                .cornerRadius(40)
+            }
+            Button {
+                print("modified Hit")
+            } label: {
+                HStack {
+                    Image(systemName: "pencil.circle")
+                    Text("수정")
+                        .fontWeight(.semibold)
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.green)
+                .cornerRadius(40)
+            }
+            
+        }
+        .padding()
+    }
+    
     func getDiaryContents() -> String {
         var text = "일기 내용입니다"
         if let contents = diary.contents {
@@ -102,12 +136,15 @@ struct DiaryDetailView: View {
                 Text("")
                 diaryDescription
                 Spacer()
+                
             }
             .frame(height: $0.size.height + 10)
             .padding(32)
             .background(.white)
             .cornerRadius(16)
             .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: -5)
+            
+            
         }
     }
     
@@ -123,7 +160,11 @@ struct DiaryDetailView: View {
                         .frame(height: geo.size.height * 0.67)
                 }
             }
-
+            
+            VStack {
+                Spacer()
+                bottomButtons
+            }
         }
         .edgesIgnoringSafeArea(.top)
         

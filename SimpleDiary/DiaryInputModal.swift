@@ -21,7 +21,7 @@ struct DiaryInputModal: View {
     var range: ClosedRange<Int> = 1...5
     
     func addData() -> Bool {
-        let newData = DiaryModel(keyDate: Date(), title: title, weather: selectedWeather)
+        let newData = DiaryModel(keyDate: Date(), title: title, weather: selectedWeather, state: DiaryStateItem(rawValue: state))
         let result = dataManager.add(DiaryModel: newData)
         return !result
         

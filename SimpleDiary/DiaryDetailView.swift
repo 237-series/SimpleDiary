@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DiaryDetailView: View {
     let diary:DiaryModel
+    @State var isEditMode:Bool = false
+    @State var contents:String = ""
     
     func getImageName()->String {
         if let weather = diary.weather {
@@ -34,6 +36,10 @@ struct DiaryDetailView: View {
                 .scaledToFit()
                 .clipped()
         }
+    }
+    
+    func modechange() {
+        self.isEditMode.toggle()
     }
     
     
@@ -82,11 +88,11 @@ struct DiaryDetailView: View {
         HStack {
             Spacer()
             Button {
-                print("Hit Button")
+                modechange()
             } label: {
                 HStack {
                     Image(systemName: "trash")
-                    Text("삭제")
+                    Text("취소")
                         .fontWeight(.semibold)
                 }
                 .padding()
@@ -95,11 +101,11 @@ struct DiaryDetailView: View {
                 .cornerRadius(40)
             }
             Button {
-                print("modified Hit")
+                modechange()
             } label: {
                 HStack {
                     Image(systemName: "pencil.circle")
-                    Text("수정")
+                    Text("수정완료")
                         .fontWeight(.semibold)
                 }
                 .padding()
@@ -109,11 +115,12 @@ struct DiaryDetailView: View {
             }
             
         }
+        .opacity(isEditMode ? 1 : 0)
         .padding()
     }
     
     func getDiaryContents() -> String {
-        var text = "일기 내용입니다"
+        var text = ""
         if let contents = diary.contents {
             text = contents
         }
@@ -122,9 +129,14 @@ struct DiaryDetailView: View {
     
     var diaryDescription: some View {
         ScrollView {
-            Text(getDiaryContents() )
-                .foregroundColor(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            if (isEditMode == false) {
+                Text(getDiaryContents() )
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            else {
+                TextField("일기내용", text: $contents, axis: .vertical)
+            }
         }
     }
     
@@ -146,6 +158,16 @@ struct DiaryDetailView: View {
             
             
         }
+        .onTapGesture(count: 2, perform: {
+            modechange()
+        })
+    }
+    
+    func areaHeight() -> Double {
+        if self.isEditMode {
+            return 0.80
+        }
+        return 0.66
     }
     
     var body: some View {
@@ -157,7 +179,7 @@ struct DiaryDetailView: View {
                 VStack(spacing: 0) {
                     Spacer()
                     diaryContents // Diary Contents
-                        .frame(height: geo.size.height * 0.67)
+                        .frame(height: geo.size.height * areaHeight())
                 }
             }
             

@@ -13,6 +13,9 @@ class DiaryDataManager:ObservableObject {
     static let shared = DiaryDataManager()
     
     @Published var dataList:[DiaryModel] = []
+
+    
+    private var datas:[String:[DiaryModel]] = [:]
     
     init() {
         if let data = UserDefaults.standard.value(forKey: DiaryDataManager.DIARY_DATA_LIST_KEY) as? Data {
@@ -23,15 +26,27 @@ class DiaryDataManager:ObservableObject {
         }
     }
     
-    func getDummyData() -> [DiaryModel] {
+    /// Data Structure
+    ///  Key: _DIARY_DATA_LIST_KEY_
+    ///  Value: Dictionary {key:"DateString", value: Array[DiaryModel] }
+    ///
+    
+    func keyDateString(from date:Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = .current
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    func getDummyData() -> [DiaryModel]  {
         return [
             DiaryModel(keyDate: Date(), title: "오늘은 좋았던날", contents: "오늘 이야기는 3달 전으로 돌아가야 한다", weather: .none, state: .verygood),
             DiaryModel(keyDate: Date(), title: "오늘은 조금 평범했던 날", contents: "조용한 주말이었다.", weather: .cloudy, state: .soso)
-            
         ]
     }
     
-    func getList() -> [DiaryModel] {
+    func getList(from date:Date = Date()) -> [DiaryModel] {
         if dataList.isEmpty {
             return getDummyData()
         }

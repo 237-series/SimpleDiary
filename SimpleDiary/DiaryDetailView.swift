@@ -39,7 +39,10 @@ struct DiaryDetailView: View {
     }
     
     func modechange() {
-        self.contents = ""
+        if let content = diary.contents {
+            self.contents = content
+        }
+        
         self.isEditMode.toggle()
     }
     
@@ -89,6 +92,9 @@ struct DiaryDetailView: View {
         HStack {
             Spacer()
             Button {
+                if let content = diary.contents {
+                    self.contents = content
+                }
                 modechange()
             } label: {
                 HStack {

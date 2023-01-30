@@ -7,23 +7,46 @@
 
 import Foundation
 
+typealias DiaryDict = [String:[DiaryModel]]
+
 class DiaryDataManager:ObservableObject {
-    static let DIARY_DATA_LIST_KEY = "DIARY_DATA_LIST_KEY"
+    static let DIARY_DATA_LIST_KEY = "DIARY_DATA_DICT_KEY"
     
     static let shared = DiaryDataManager()
     
     @Published var dataList:[DiaryModel] = []
-
     
-    private var datas:[String:[DiaryModel]] = [:]
+    private var datas:DiaryDict = [:]
+    private var keyDate = ""
+    private var strKeyDate:String {
+        get {
+            keyDate
+        }
+        set(newKeyDate) {
+            keyDate = newKeyDate
+            if let keyDataList = datas[keyDate] as [DiaryModel]? {
+                dataList = keyDataList
+            }
+            else {
+                dataList = []
+            }
+        }
+    }
+    
     
     init() {
         if let data = UserDefaults.standard.value(forKey: DiaryDataManager.DIARY_DATA_LIST_KEY) as? Data {
-            let accountList = try? PropertyListDecoder().decode([DiaryModel].self, from: data)
-            if let list = accountList {
-                dataList = list
+            if let savedObject = try? JSONDecoder().decode(DiaryDict.self, from: data) {
+//            let accountList = try? PropertyListDecoder().decode([DiaryModel].self, from: data)
+//            if let list = accountList {
+//                dataList = list
+//            }
+                datas = savedObject
             }
+        } else {
+            //datas = [keyDate : getDummyData()]
         }
+        strKeyDate = keyDateString(from: Date())
     }
     
     /// Data Structure
@@ -52,25 +75,25 @@ class DiaryDataManager:ObservableObject {
         }
         
         var returnList:[DiaryModel] = dataList
-//        if acCate != .none {
-//            returnList = []
-//            for data in dataList {
-//                if data.category == acCate {
-//                    returnList.append(acData)
-//                }
-//            }
-//        }
-//        
         return returnList
+        
+        
     }
     
     func add(DiaryModel acData:DiaryModel?) -> Bool {
         // Add LocalList
         if let data = acData {
+            // 1. Set Key
+            strKeyDate = data.keyDateString()
             dataList.insert(data, at: 0)
             
+            datas[strKeyDate] = dataList
+            
             // Add Save List
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(dataList), forKey: DiaryDataManager.DIARY_DATA_LIST_KEY)
+//            UserDefaults.standard.set(datas, forKey: DiaryDataManager.DIARY_DATA_LIST_KEY)
+            if let encoded = try? JSONEncoder().encode(datas) {
+                UserDefaults.standard.set(encoded, forKey: DiaryDataManager.DIARY_DATA_LIST_KEY)
+            }
             return UserDefaults.standard.synchronize()
         }
         

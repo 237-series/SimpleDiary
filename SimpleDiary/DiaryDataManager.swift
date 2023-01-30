@@ -70,14 +70,28 @@ class DiaryDataManager:ObservableObject {
     }
     
     func getList(from date:Date = Date()) -> [DiaryModel] {
-        if dataList.isEmpty {
-            return getDummyData()
+        let newKeyDate = keyDateString(from: date)
+        self.keyDate = newKeyDate
+        return dataList
+    }
+    
+    func saveDiary(Diary diary:DiaryModel?) -> Bool {
+        if let data = diary {
+            let myKeyDate = data.keyDateString()
+            self.strKeyDate = myKeyDate
+            
+            for (i , item) in dataList.enumerated() {
+                if (item.keyDate == data.keyDate) {
+                    dataList.remove(at: i)
+                    break
+                }
+            }
+            
+            dataList.insert(data, at: 0)
+            return true
         }
         
-        var returnList:[DiaryModel] = dataList
-        return returnList
-        
-        
+        return false
     }
     
     func add(DiaryModel acData:DiaryModel?) -> Bool {

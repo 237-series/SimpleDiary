@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DiaryDetailView: View {
-    let diary:DiaryModel
+    @State var diary:DiaryModel
     @State var isEditMode:Bool = false
     @State var contents:String = ""
     
@@ -39,6 +39,7 @@ struct DiaryDetailView: View {
     }
     
     func modechange() {
+        self.contents = ""
         self.isEditMode.toggle()
     }
     
@@ -101,7 +102,10 @@ struct DiaryDetailView: View {
                 .cornerRadius(40)
             }
             Button {
-                modechange()
+//                modechange()
+                diary.contents = self.contents
+                self.isEditMode = !DiaryDataManager.shared.saveDiary(Diary: self.diary)
+                self.contents = ""
             } label: {
                 HStack {
                     Image(systemName: "pencil.circle")

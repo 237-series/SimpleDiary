@@ -35,7 +35,7 @@ struct ContentsArea:View {
     var body: some View {
         ScrollView() {
             VStack(spacing: 20) {
-                ForEach(Array(dataManager.getList().enumerated()), id: \.offset) {idx, data in
+                ForEach(Array(dataManager.dataList.enumerated()), id: \.offset) {idx, data in
                     DiaryListRow(diary: data)
                 }
                 

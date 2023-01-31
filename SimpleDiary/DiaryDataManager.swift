@@ -18,7 +18,7 @@ class DiaryDataManager:ObservableObject {
     
     private var datas:DiaryDict = [:]
     
-    var keyDate = ""
+    @Published var keyDate = ""
     var strKeyDate:String {
         get {
             keyDate
@@ -70,11 +70,13 @@ class DiaryDataManager:ObservableObject {
         ]
     }
     
+    /*
     func getList(from date:Date = Date()) -> [DiaryModel] {
         let newKeyDate = keyDateString(from: date)
         self.keyDate = newKeyDate
         return dataList
     }
+     */
     
     func saveDiary(Diary diary:DiaryModel?) -> Bool {
         if let data = diary {

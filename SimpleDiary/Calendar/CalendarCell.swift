@@ -19,6 +19,7 @@ extension Date {
 
 struct CalendarCell: View {
     @EnvironmentObject var dateHolder: DateHolder
+    @ObservedObject var manager:DiaryDataManager = DiaryDataManager.shared
     
     let count : Int
     let startingSpaces: Int
@@ -31,7 +32,8 @@ struct CalendarCell: View {
                 .foregroundColor(textColor(type: monthStruct().monthType))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             Rectangle()
-                .opacity(getKeyDate() == DiaryDataManager.shared.keyDate ? 0.3 : 0.0)
+//                .opacity(getKeyDate() == DiaryDataManager.shared.keyDate ? 0.3 : 0.0)
+                .opacity(getKeyDate() == manager.strKeyDate ? 0.3 : 0.0)
         }
         .onTapGesture {
             let keyDate = getKeyDate()

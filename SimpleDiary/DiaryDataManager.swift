@@ -18,6 +18,8 @@ class DiaryDataManager:ObservableObject {
     
     private var datas:DiaryDict = [:]
     
+    var today:String = ""
+    
     @Published var keyDate = ""
     var strKeyDate:String {
         get {
@@ -48,6 +50,7 @@ class DiaryDataManager:ObservableObject {
             //datas = [keyDate : getDummyData()]
         }
         strKeyDate = keyDateString(from: Date())
+        today = strKeyDate
     }
     
     /// Data Structure

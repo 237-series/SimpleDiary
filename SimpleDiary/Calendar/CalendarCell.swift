@@ -32,7 +32,9 @@ struct CalendarCell: View {
                 .foregroundColor(textColor(type: monthStruct().monthType))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             Rectangle()
-//                .opacity(getKeyDate() == DiaryDataManager.shared.keyDate ? 0.3 : 0.0)
+                .opacity(getKeyDate() == DiaryDataManager.shared.today ? 0.3 : 0.0)
+                
+            Circle()
                 .opacity(getKeyDate() == manager.strKeyDate ? 0.3 : 0.0)
         }
         .onTapGesture {
